@@ -3,7 +3,6 @@ package simplejavacalculatorTest;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import static java.lang.Double.NaN;
-import java.lang.Math;
 
 
 import simplejavacalculator.Calculator;
@@ -78,25 +77,7 @@ class CalculatorTest {
 		Calculator calculator = new Calculator();
 		Assertions.assertEquals(0.10, calculator.calculateMono(Calculator.MonoOperatorModes.oneDividedBy, 10.0));
 	}
-	
-	@Test
-	void CalculateMonoSinTest() {
-		Calculator calculator = new Calculator();
-		Assertions.assertEquals(0.5, calculator.calculateMono(Calculator.MonoOperatorModes.sin, java.lang.Math.PI / 6), 0.0000000001);
-	}
-	
-	@Test
-	void CalculateMonoCosTest() {
-		Calculator calculator = new Calculator();
-		Assertions.assertEquals(0.5, calculator.calculateMono(Calculator.MonoOperatorModes.cos, java.lang.Math.PI / 3), 0.0000000001);
-	}
-	
-	@Test
-	void CalculateMonoTanTest() {
-		Calculator calculator = new Calculator();
-		Assertions.assertEquals(1.0, calculator.calculateMono(Calculator.MonoOperatorModes.tan, java.lang.Math.PI / 4), 0.0000000001);
-	}
-	
+
 	@Test
 	void CalculateMonoLogTest() {
 		Calculator calculator = new Calculator();

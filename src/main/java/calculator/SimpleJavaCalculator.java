@@ -1,6 +1,6 @@
 /**
  * @name        Simple Java Calculator
- * @package     ph.calculator
+ * @package     ph.main.java.calculator
  * @file        Main.java
  * @author      SORIA Pierre-Henry
  * @email       pierrehs@hotmail.com
@@ -14,7 +14,9 @@
  * @modemail    contact@achinthagunasekara.com
  */
 
-package simplejavacalculator;
+package calculator;
+
+import simplejavacalculator.UI;
 
 public class SimpleJavaCalculator {
    
@@ -24,7 +26,7 @@ public class SimpleJavaCalculator {
          uiCal.init();
       }
       catch (Exception e) {
-         System.out.println(e.getMessage());   
+         e.printStackTrace();
       }
       
    }

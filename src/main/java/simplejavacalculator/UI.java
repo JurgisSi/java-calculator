@@ -1,6 +1,6 @@
 /**
  * @name        Simple Java Calculator
- * @package     ph.calculator
+ * @package     ph.main.java.calculator
  * @file        UI.java
  * @author      SORIA Pierre-Henry
  * @email       pierrehs@hotmail.com
@@ -30,8 +30,7 @@ import java.awt.Font;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 
-import java.awt.Image;
-import javax.swing.ImageIcon; 
+import javax.swing.ImageIcon;
 import java.io.*;
 
 public class UI implements ActionListener {
@@ -51,7 +50,7 @@ public class UI implements ActionListener {
    private final JTextArea text;
    private final JButton but[], butAdd, butMinus, butMultiply, butDivide,
       butEqual, butCancel, butSquareRoot, butSquare, butOneDividedBy,
-      butCos, butSin, butTan, butxpowerofy, butlog, butrate, butabs, butBinary;
+      butxpowerofy, butlog, butrate, butabs;
    private final Calculator calc;
    
    private final String[] buttonValue = {"0", "1", "2", "3", "4", "5", "6",
@@ -59,15 +58,10 @@ public class UI implements ActionListener {
    
    private final Font font;
    private final Font textFont;
-   private ImageIcon image;
-   private BufferedImageCustom imageReturn;
    
-   public UI() throws IOException {
+   public UI() {
       frame = new JFrame("Calculator PH");
-      
-      imageReturn = new BufferedImageCustom();
-      image = new ImageIcon(imageReturn.imageReturn());      
-      
+
       panel = new JPanel();
       panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
       panelSub1 = new JPanel(new FlowLayout());
@@ -97,27 +91,22 @@ public class UI implements ActionListener {
       butSquareRoot = new JButton("sqrt");      
       butSquare = new JButton("x*x");      
       butOneDividedBy = new JButton("1/x");      
-      butCos = new JButton("Cos");      
-      butSin = new JButton("Sin");      
-      butTan = new JButton("Tan");      
-      butxpowerofy = new JButton("x^y");      
+      butxpowerofy = new JButton("x^y");
       butlog = new JButton("log10(x)");      
       butrate = new JButton("x%");      
       butabs = new JButton("abs(x)");      
       butCancel = new JButton("C");      
-      butBinary = new JButton("Bin");      
-      
+
       calc = new Calculator();
       
    }
    
    public void init() {      
-      frame.setSize(450, 450);
+      frame.setSize(800, 450);
       frame.setLocationRelativeTo(null); 
       frame.setResizable(false);
       frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-      frame.setIconImage(image.getImage());
-      
+
       text.setFont(textFont);
       text.setEditable(false);
       
@@ -132,16 +121,12 @@ public class UI implements ActionListener {
       butSquareRoot.setFont(font);
       butSquare.setFont(font);
       butOneDividedBy.setFont(font);
-      butCos.setFont(font);
-      butSin.setFont(font);
-      butTan.setFont(font);
       butxpowerofy.setFont(font);
       butlog.setFont(font);
       butrate.setFont(font);
       butabs.setFont(font);
       butCancel.setFont(font);
-      butBinary.setFont(font); 
-      
+
       panel.add(Box.createHorizontalStrut(100));
       panelSub1.add(text);
       panel.add(panelSub1);
@@ -181,15 +166,11 @@ public class UI implements ActionListener {
       panelSub6.add(butxpowerofy);
       panel.add(panelSub6);
       
-      panelSub7.add(butCos);
-      panelSub7.add(butSin);
-      panelSub7.add(butTan);
       panel.add(panelSub7);
       
       panelSub8.add(butlog);
       panelSub8.add(butrate);
       panelSub8.add(butabs);
-      panelSub8.add(butBinary);
       panel.add(panelSub8);
       
       for (int i = 0; i < 10; i++) {
@@ -202,15 +183,11 @@ public class UI implements ActionListener {
       butSquare.addActionListener(this);
       butSquareRoot.addActionListener(this);
       butOneDividedBy.addActionListener(this);
-      butCos.addActionListener(this);
-      butSin.addActionListener(this);
-      butTan.addActionListener(this);
       butxpowerofy.addActionListener(this);
       butlog.addActionListener(this);
       butrate.addActionListener(this);
       butabs.addActionListener(this);
-      butBinary.addActionListener(this);
-      
+
       butEqual.addActionListener(this);
       butCancel.addActionListener(this);
       
@@ -271,15 +248,6 @@ public class UI implements ActionListener {
          if (source == butOneDividedBy)
             writer(calc.calculateMono(Calculator.MonoOperatorModes.oneDividedBy, reader()));
 
-         if (source == butCos)
-            writer(calc.calculateMono(Calculator.MonoOperatorModes.cos, reader()));
-
-         if (source == butSin)
-            writer(calc.calculateMono(Calculator.MonoOperatorModes.sin, reader()));
-
-         if (source == butTan)
-            writer(calc.calculateMono(Calculator.MonoOperatorModes.tan, reader()));
-
          if (source == butlog)
             writer(calc.calculateMono(Calculator.MonoOperatorModes.log, reader()));
 
@@ -295,19 +263,9 @@ public class UI implements ActionListener {
          if (source == butCancel)
             writer(calc.reset());
 
-         if (source == butBinary)
-            parsetoBinary();
       }
 
       text.selectAll();
-   }
-   
-   private void parsetoBinary() {
-      try {
-         text.setText("" + Long.toBinaryString(Long.parseLong(text.getText())));
-      } catch (NumberFormatException ex) {
-         System.err.println("Error while parse to binary." + ex.toString());
-      }
    }
    
    public Double reader() {
